@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
@@ -6,7 +7,7 @@ using YooAsset;
 using YooAsset.Editor;
 using BuildResult = UnityEditor.Build.Reporting.BuildResult;
 
-namespace TEngine.Editor
+namespace TEngine
 {
     /// <summary>
     /// 打包工具类。
@@ -25,7 +26,7 @@ namespace TEngine.Editor
 
             BuildTarget target = GetBuildTarget(platform);
             
-            BuildDLLCommand.BuildAndCopyDlls(target);
+            // BuildDLLCommand.BuildAndCopyDlls(target);
         }
 
         public static void BuildAssetBundle()
@@ -56,11 +57,11 @@ namespace TEngine.Editor
             Debug.LogWarning($"Start BuildPackage BuildTarget:{target} outputPath:{outputRoot}");
         }
         
-        [MenuItem("TEngine/Quick Build/一键打包AssetBundle")]
+        [MenuItem("TEngine/Build/一键打包AssetBundle")]
         public static void BuildCurrentPlatformAB()
         {
             BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
-            BuildInternal(target, Application.dataPath + "/../Builds/Windows", packageVersion: GetBuildPackageVersion());
+            BuildInternal(target, Application.dataPath + "/../Builds/", packageVersion: GetBuildPackageVersion());
             AssetDatabase.Refresh();
         }
 
@@ -135,16 +136,19 @@ namespace TEngine.Editor
             buildParameters.BuildinFileRoot = AssetBundleBuilderHelper.GetStreamingAssetsRoot();
             buildParameters.BuildPipeline = buildPipeline.ToString();
             buildParameters.BuildTarget = buildTarget;
-            buildParameters.BuildMode = EBuildMode.IncrementalBuild;
+            buildParameters.BuildBundleType = (int)EBuildBundleType.AssetBundle;
             buildParameters.PackageName = "DefaultPackage";
             buildParameters.PackageVersion = packageVersion;
             buildParameters.VerifyBuildingResult = true;
-            buildParameters.FileNameStyle =  EFileNameStyle.BundleName_HashName;
-            buildParameters.BuildinFileCopyOption = EBuildinFileCopyOption.None;
-            buildParameters.BuildinFileCopyParams = string.Empty;
-            buildParameters.EncryptionServices = CreateEncryptionInstance("DefaultPackage",buildPipeline);
             // 启用共享资源打包
             buildParameters.EnableSharePackRule = true;
+            buildParameters.FileNameStyle =  EFileNameStyle.BundleName_HashName;
+            buildParameters.BuildinFileCopyOption = EBuildinFileCopyOption.ClearAndCopyAll;
+            buildParameters.BuildinFileCopyParams = string.Empty;
+            buildParameters.EncryptionServices = CreateEncryptionInstance("DefaultPackage",buildPipeline);
+            buildParameters.ClearBuildCacheFiles = false; //不清理构建缓存，启用增量构建，可以提高打包速度！
+            buildParameters.UseAssetDependencyDB = true; //使用资源依赖关系数据库，可以提高打包速度！
+            
             
             var buildResult = pipeline.Run(buildParameters, true);
             if (buildResult.Success)
@@ -155,7 +159,6 @@ namespace TEngine.Editor
             {
                 Debug.LogError($"构建失败 : {buildResult.ErrorInfo}");
             }
-            
         }
         
         /// <summary>
@@ -177,15 +180,15 @@ namespace TEngine.Editor
             }
         }
 
-        [MenuItem("TEngine/Quick Build/一键打包Window", false, 90)]
+        [MenuItem("TEngine/Build/一键打包Window", false, 30)]
         public static void AutomationBuild()
         {
             BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
-            BuildDLLCommand.BuildAndCopyDlls(target);
+            // BuildDLLCommand.BuildAndCopyDlls(target);
             AssetDatabase.Refresh();
             BuildInternal(target, Application.dataPath + "/../Builds/Windows", packageVersion: GetBuildPackageVersion());
             AssetDatabase.Refresh();
-            BuildImp(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64, $"{Application.dataPath}/../Builds/Windows/Release_Windows.exe");
+            BuildImp(BuildTargetGroup.Standalone, BuildTarget.StandaloneWindows64, $"{Application.dataPath}/../Build/Windows/Release_Windows.exe");
         }
 
         // 构建版本相关
@@ -195,11 +198,11 @@ namespace TEngine.Editor
             return DateTime.Now.ToString("yyyy-MM-dd") + "-" + totalMinutes;
         }
 
-        [MenuItem("TEngine/Quick Build/一键打包Android", false, 90)]
+        [MenuItem("TEngine/Build/一键打包Android", false, 30)]
         public static void AutomationBuildAndroid()
         {
             BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
-            BuildDLLCommand.BuildAndCopyDlls(target);
+            // BuildDLLCommand.BuildAndCopyDlls(target);
             AssetDatabase.Refresh();
             BuildInternal(target, outputRoot: Application.dataPath + "/../Bundles", packageVersion: GetBuildPackageVersion());
             AssetDatabase.Refresh();
@@ -207,11 +210,11 @@ namespace TEngine.Editor
             // BuildImp(BuildTargetGroup.Android, BuildTarget.Android, $"{Application.dataPath}/../Build/Android/Android.apk");
         }
 
-        [MenuItem("TEngine/Quick Build/一键打包IOS", false, 90)]
+        [MenuItem("TEngine/Build/一键打包IOS", false, 30)]
         public static void AutomationBuildIOS()
         {
             BuildTarget target = EditorUserBuildSettings.activeBuildTarget;
-            BuildDLLCommand.BuildAndCopyDlls(target);
+            // BuildDLLCommand.BuildAndCopyDlls(target);
             AssetDatabase.Refresh();
             BuildInternal(target, outputRoot: Application.dataPath + "/../Bundles", packageVersion: GetBuildPackageVersion());
             AssetDatabase.Refresh();
@@ -225,7 +228,7 @@ namespace TEngine.Editor
 
             BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
             {
-                scenes = new[] { "Assets/Scenes/main.unity" },
+                scenes = EditorBuildSettings.scenes.Select(scene => scene.path).ToArray(),
                 locationPathName = locationPathName,
                 targetGroup = buildTargetGroup,
                 target = buildTarget,

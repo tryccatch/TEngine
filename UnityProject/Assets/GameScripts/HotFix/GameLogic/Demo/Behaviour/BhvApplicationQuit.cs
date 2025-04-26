@@ -10,6 +10,6 @@ public class BhvApplicationQuit : MonoBehaviour
 	}
 	private void OnApplicationQuit()
 	{
-		YooAssets.Destroy();
+		
 	}
 }

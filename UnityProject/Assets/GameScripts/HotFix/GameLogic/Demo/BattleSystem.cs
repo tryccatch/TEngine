@@ -10,9 +10,14 @@ using Random = UnityEngine.Random;
 /// <summary>
 /// 战斗房间
 /// </summary>
-[Update]
-public class BattleSystem : BehaviourSingleton<BattleSystem>
+public class BattleSystem : Singleton<BattleSystem>
 {
+    protected override void OnInit()
+    {
+        Utility.Unity.AddUpdateListener(Update);
+        base.OnInit();
+    }
+
     private enum ESteps
     {
         None,
@@ -106,7 +111,7 @@ public class BattleSystem : BehaviourSingleton<BattleSystem>
         GameEvent.RemoveEventListener<Vector3, Quaternion>(ActorEventDefine.EnemyFireBullet, OnEnemyFireBullet);
     }
 
-    public override void Update()
+    public void Update()
     {
         UpdateRoom();
     }

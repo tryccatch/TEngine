@@ -44,7 +44,7 @@ namespace GameLogic
         private async UniTaskVoid OnClickRestartBtn()
         {
             await UniTask.Yield();
-            await GameModule.Scene.LoadScene("scene_battle").ToUniTask();
+            await GameModule.Scene.LoadSceneAsync("scene_battle");
     
             BattleSystem.Instance.DestroyRoom();
             BattleSystem.Instance.LoadRoom().Forget();
