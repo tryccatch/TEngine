@@ -30,7 +30,8 @@ public partial class GameApp
         Log.Warning("======= Entrance GameApp =======");
         Utility.Unity.AddDestroyListener(Release);
         Log.Warning("======= StartGameLogic =======");
-        StartGameLogic();
+        // StartGameLogic();
+        StartChapterView();
     }
     
     private static void StartGameLogic()
@@ -38,7 +39,14 @@ public partial class GameApp
         // GameEvent.Get<ILoginUI>().ShowLoginUI();
         GameModule.UI.ShowUIAsync<BattleMainUI>();
     }
-    
+
+    private static void StartChapterView()
+    {
+        // GameEvent.Get<ILoginUI>().ShowLoginUI();
+        // GameModule.UI.ShowUIAsync<BattleMainUI>();
+        ChapterSystem.Instance.LoadView();
+    }
+
     private static void Release()
     {
         SingletonSystem.Release();
