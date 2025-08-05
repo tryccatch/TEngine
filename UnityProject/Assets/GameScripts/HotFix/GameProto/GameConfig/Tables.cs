@@ -33,6 +33,42 @@ public partial class Tables
             m_TbItem.ResolveRef(this);
         }
     }
+    private chapter.TbChapterItem m_TbChapterItem;
+    public chapter.TbChapterItem TbChapterItem 
+    {
+        get
+        {
+            if (m_TbChapterItem == null)
+            {
+                m_TbChapterItem = new chapter.TbChapterItem(defaultLoader("chapter_tbchapteritem"));
+                m_TbChapterItem.ResolveRef(this);
+            }
+            return m_TbChapterItem;
+        }
+        set
+        {
+            m_TbChapterItem = value;
+            m_TbChapterItem.ResolveRef(this);
+        }
+    }
+    private chapter.TbChapterInfo m_TbChapterInfo;
+    public chapter.TbChapterInfo TbChapterInfo 
+    {
+        get
+        {
+            if (m_TbChapterInfo == null)
+            {
+                m_TbChapterInfo = new chapter.TbChapterInfo(defaultLoader("chapter_tbchapterinfo"));
+                m_TbChapterInfo.ResolveRef(this);
+            }
+            return m_TbChapterInfo;
+        }
+        set
+        {
+            m_TbChapterInfo = value;
+            m_TbChapterInfo.ResolveRef(this);
+        }
+    }
 
     #endregion
 

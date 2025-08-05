@@ -21,8 +21,8 @@ MonoBehaviour:
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
     AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
     Groups:
     - GroupName: Actor
       GroupDesc: 
@@ -44,6 +44,19 @@ MonoBehaviour:
       Collectors:
       - CollectPath: Assets/AssetRaw/Audios
         CollectorGUID: 8ef7a411b66e70f4cb65c2233c9a0868
+        CollectorType: 0
+        AddressRuleName: AddressByFileName
+        PackRuleName: PackDirectory
+        FilterRuleName: CollectAll
+        AssetTags: 
+        UserData: 
+    - GroupName: Chapter
+      GroupDesc: 
+      AssetTags: 
+      ActiveRuleName: EnableGroup
+      Collectors:
+      - CollectPath: Assets/AssetRaw/Chapter
+        CollectorGUID: a53725086c996f04b85f266df81c69c9
         CollectorType: 0
         AddressRuleName: AddressByFileName
         PackRuleName: PackDirectory
@@ -167,8 +180,8 @@ MonoBehaviour:
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
     AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
     Groups:
     - GroupName: ModelGroup
       GroupDesc: 
@@ -185,8 +198,8 @@ MonoBehaviour:
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
     AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
     Groups:
     - GroupName: ModelGroup
       GroupDesc: 
@@ -203,8 +216,8 @@ MonoBehaviour:
     EnableAddressable: 1
     LocationToLower: 0
     IncludeAssetGUID: 0
-    IgnoreDefaultType: 1
     AutoCollectShaders: 1
+    IgnoreRuleName: NormalIgnoreRule
     Groups:
     - GroupName: ModelGroup
       GroupDesc: 

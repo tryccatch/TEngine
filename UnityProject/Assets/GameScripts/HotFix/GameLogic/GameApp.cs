@@ -42,9 +42,17 @@ public partial class GameApp
 
     private static void StartChapterView()
     {
-        var config = ConfigSystem.Instance.Tables.TbItem.DataList;
+        var infos = ConfigSystem.Instance.Tables.TbChapterInfo.DataList;
 
-        Log.Debug(config.Count);
+        Log.Debug(infos.Count);
+
+        foreach (var info in infos)
+        {
+            foreach (var item in info.UpgradeItemList_Ref)
+            {
+                Log.Debug(item.Name);
+            }
+        }
 
         GameModule.UI.ShowUIAsync<UIChapterWindow>();
     }
