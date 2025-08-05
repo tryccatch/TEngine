@@ -10,40 +10,42 @@
 using Luban;
 
 
-namespace GameConfig.test
+namespace GameConfig.chapter
 {
-/// <summary>
-/// 这是一个圆
-/// </summary>
-public sealed partial class Circle : Shape
+public sealed partial class ChapterItemLevel : Luban.BeanBase
 {
-    public Circle(ByteBuf _buf)  : base(_buf) 
+    public ChapterItemLevel(ByteBuf _buf) 
     {
-        Radius = _buf.ReadFloat();
+        Level = _buf.ReadInt();
+        Price = _buf.ReadInt();
     }
 
-    public static Circle DeserializeCircle(ByteBuf _buf)
+    public static ChapterItemLevel DeserializeChapterItemLevel(ByteBuf _buf)
     {
-        return new test.Circle(_buf);
+        return new chapter.ChapterItemLevel(_buf);
     }
 
     /// <summary>
-    /// 半径
+    /// 等级
     /// </summary>
-    public readonly float Radius;
+    public readonly int Level;
+    /// <summary>
+    /// 价格
+    /// </summary>
+    public readonly int Price;
    
-    public const int __ID__ = 2131829196;
+    public const int __ID__ = -1472430587;
     public override int GetTypeId() => __ID__;
 
-    public override void ResolveRef(Tables tables)
+    public  void ResolveRef(Tables tables)
     {
-        base.ResolveRef(tables);
     }
 
     public override string ToString()
     {
         return "{ "
-        + "radius:" + Radius + ","
+        + "level:" + Level + ","
+        + "price:" + Price + ","
         + "}";
     }
 }

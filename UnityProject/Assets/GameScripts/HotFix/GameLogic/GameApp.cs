@@ -48,7 +48,7 @@ public partial class GameApp
 
         foreach (var info in infos)
         {
-            foreach (var item in info.UpgradeItemList_Ref)
+            foreach (var item in info.ItemList_Ref)
             {
                 Log.Debug(item.Name);
             }

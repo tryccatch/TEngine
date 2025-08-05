@@ -18,6 +18,8 @@ public sealed partial class ChapterItem : Luban.BeanBase
     {
         Id = _buf.ReadInt();
         Name = _buf.ReadString();
+        Location = _buf.ReadString();
+        {int n0 = _buf.ReadSize(); LevelList = new System.Collections.Generic.List<chapter.ChapterItemLevel>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { chapter.ChapterItemLevel _e0;  _e0 = global::GameConfig.chapter.ChapterItemLevel.DeserializeChapterItemLevel(_buf); LevelList.Add(_e0);}}
     }
 
     public static ChapterItem DeserializeChapterItem(ByteBuf _buf)
@@ -27,12 +29,15 @@ public sealed partial class ChapterItem : Luban.BeanBase
 
     public readonly int Id;
     public readonly string Name;
+    public readonly string Location;
+    public readonly System.Collections.Generic.List<chapter.ChapterItemLevel> LevelList;
    
     public const int __ID__ = -1849733953;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        foreach (var _e in LevelList) { _e?.ResolveRef(tables); }
     }
 
     public override string ToString()
@@ -40,6 +45,8 @@ public sealed partial class ChapterItem : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "name:" + Name + ","
+        + "location:" + Location + ","
+        + "levelList:" + Luban.StringUtil.CollectionToString(LevelList) + ","
         + "}";
     }
 }

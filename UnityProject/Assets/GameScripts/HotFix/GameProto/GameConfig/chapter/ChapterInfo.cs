@@ -18,7 +18,7 @@ public sealed partial class ChapterInfo : Luban.BeanBase
     {
         Id = _buf.ReadInt();
         Name = _buf.ReadString();
-        {int n0 = _buf.ReadSize(); UpgradeItemList = new System.Collections.Generic.List<int>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { int _e0;  _e0 = _buf.ReadInt(); UpgradeItemList.Add(_e0);}}
+        {int n0 = _buf.ReadSize(); ItemList = new System.Collections.Generic.List<int>(n0);for(var i0 = 0 ; i0 < n0 ; i0++) { int _e0;  _e0 = _buf.ReadInt(); ItemList.Add(_e0);}}
     }
 
     public static ChapterInfo DeserializeChapterInfo(ByteBuf _buf)
@@ -28,16 +28,16 @@ public sealed partial class ChapterInfo : Luban.BeanBase
 
     public readonly int Id;
     public readonly string Name;
-    public readonly System.Collections.Generic.List<int> UpgradeItemList;
-    public System.Collections.Generic.List<chapter.ChapterItem> UpgradeItemList_Ref;
+    public readonly System.Collections.Generic.List<int> ItemList;
+    public System.Collections.Generic.List<chapter.ChapterItem> ItemList_Ref;
    
     public const int __ID__ = -1849739686;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
-        UpgradeItemList_Ref = new System.Collections.Generic.List<chapter.ChapterItem>();
-        foreach (var _v in UpgradeItemList) { UpgradeItemList_Ref.Add(tables.TbChapterItem.GetOrDefault(_v)); }
+        ItemList_Ref = new System.Collections.Generic.List<chapter.ChapterItem>();
+        foreach (var _v in ItemList) { ItemList_Ref.Add(tables.TbChapterItem.GetOrDefault(_v)); }
 
     }
 
@@ -46,7 +46,7 @@ public sealed partial class ChapterInfo : Luban.BeanBase
         return "{ "
         + "id:" + Id + ","
         + "name:" + Name + ","
-        + "upgradeItemList:" + Luban.StringUtil.CollectionToString(UpgradeItemList) + ","
+        + "itemList:" + Luban.StringUtil.CollectionToString(ItemList) + ","
         + "}";
     }
 }
