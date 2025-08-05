@@ -42,9 +42,7 @@ public partial class GameApp
 
     private static void StartChapterView()
     {
-        // GameEvent.Get<ILoginUI>().ShowLoginUI();
-        // GameModule.UI.ShowUIAsync<BattleMainUI>();
-        ChapterSystem.Instance.LoadView();
+        GameModule.UI.ShowUIAsync<UIChapterWindow>();
     }
 
     private static void Release()
