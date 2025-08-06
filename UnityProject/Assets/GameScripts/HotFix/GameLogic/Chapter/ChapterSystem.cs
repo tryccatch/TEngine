@@ -83,7 +83,8 @@ namespace GameLogic
             _renderers ??= InitRenderers();
 
             ChapterModel?.OnRelease();
-            ChapterModel = new ChapterModel(GameModule.Resource.LoadGameObject(nameof(ChapterModel)));
+            // ChapterModel = new ChapterModel(GameModule.Resource.LoadGameObject(nameof(ChapterModel)));
+            ChapterModel = new ChapterModel(new GameObject(nameof(ChapterModel)));
 
             ChapterRenderer ??= _renderers.Get();
             ChapterRenderer.SetTarget(ChapterModel.Root);

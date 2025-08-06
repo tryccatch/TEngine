@@ -12,17 +12,18 @@ using Luban;
 
 namespace GameConfig.chapter
 {
-public sealed partial class ChapterItemLevel : Luban.BeanBase
+public sealed partial class EntityDetail : Luban.BeanBase
 {
-    public ChapterItemLevel(ByteBuf _buf) 
+    public EntityDetail(ByteBuf _buf) 
     {
         Level = _buf.ReadInt();
         Price = _buf.ReadInt();
+        Exp = _buf.ReadInt();
     }
 
-    public static ChapterItemLevel DeserializeChapterItemLevel(ByteBuf _buf)
+    public static EntityDetail DeserializeEntityDetail(ByteBuf _buf)
     {
-        return new chapter.ChapterItemLevel(_buf);
+        return new chapter.EntityDetail(_buf);
     }
 
     /// <summary>
@@ -33,8 +34,12 @@ public sealed partial class ChapterItemLevel : Luban.BeanBase
     /// 价格
     /// </summary>
     public readonly int Price;
+    /// <summary>
+    /// 经验
+    /// </summary>
+    public readonly int Exp;
    
-    public const int __ID__ = -1472430587;
+    public const int __ID__ = 461789749;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
@@ -46,6 +51,7 @@ public sealed partial class ChapterItemLevel : Luban.BeanBase
         return "{ "
         + "level:" + Level + ","
         + "price:" + Price + ","
+        + "exp:" + Exp + ","
         + "}";
     }
 }

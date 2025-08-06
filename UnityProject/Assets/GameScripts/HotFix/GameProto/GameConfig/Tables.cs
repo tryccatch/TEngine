@@ -15,40 +15,40 @@ public partial class Tables
 {
     #region The Tables
 
-    private chapter.TbChapterItem m_TbChapterItem;
-    public chapter.TbChapterItem TbChapterItem 
+    private chapter.TbChapterConfig m_TbChapterConfig;
+    public chapter.TbChapterConfig TbChapterConfig 
     {
         get
         {
-            if (m_TbChapterItem == null)
+            if (m_TbChapterConfig == null)
             {
-                m_TbChapterItem = new chapter.TbChapterItem(defaultLoader("chapter_tbchapteritem"));
-                m_TbChapterItem.ResolveRef(this);
+                m_TbChapterConfig = new chapter.TbChapterConfig(defaultLoader("chapter_tbchapterconfig"));
+                m_TbChapterConfig.ResolveRef(this);
             }
-            return m_TbChapterItem;
+            return m_TbChapterConfig;
         }
         set
         {
-            m_TbChapterItem = value;
-            m_TbChapterItem.ResolveRef(this);
+            m_TbChapterConfig = value;
+            m_TbChapterConfig.ResolveRef(this);
         }
     }
-    private chapter.TbChapterInfo m_TbChapterInfo;
-    public chapter.TbChapterInfo TbChapterInfo 
+    private chapter.TbChapterEntity m_TbChapterEntity;
+    public chapter.TbChapterEntity TbChapterEntity 
     {
         get
         {
-            if (m_TbChapterInfo == null)
+            if (m_TbChapterEntity == null)
             {
-                m_TbChapterInfo = new chapter.TbChapterInfo(defaultLoader("chapter_tbchapterinfo"));
-                m_TbChapterInfo.ResolveRef(this);
+                m_TbChapterEntity = new chapter.TbChapterEntity(defaultLoader("chapter_tbchapterentity"));
+                m_TbChapterEntity.ResolveRef(this);
             }
-            return m_TbChapterInfo;
+            return m_TbChapterEntity;
         }
         set
         {
-            m_TbChapterInfo = value;
-            m_TbChapterInfo.ResolveRef(this);
+            m_TbChapterEntity = value;
+            m_TbChapterEntity.ResolveRef(this);
         }
     }
 
