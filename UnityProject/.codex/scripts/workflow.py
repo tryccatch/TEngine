@@ -20,7 +20,7 @@ def parser():
     commands.add_parser("check", help="Validate instructions, links, and deterministic unit tests.")
     verify = commands.add_parser("verify", help="Run the selected validation profile.")
     verify.add_argument("--profile", choices=("docs", "code", "unity", "full"), required=True)
-    verify.add_argument("--test-filter", default="TEngine.Workflow", help="Explicit test selection, never all third-party tests.")
+    verify.add_argument("--test-filter", default="TEngine.Resource.Tests", help="Explicit test selection, never all third-party tests.")
     verify.add_argument("--filter-type", choices=("assembly", "testName", "category"), default="assembly")
     verify.add_argument("--timeout", type=int, default=300)
     verify.add_argument("--asset", action="append", default=[], help="Explicit asset path to validate; repeat as needed.")
