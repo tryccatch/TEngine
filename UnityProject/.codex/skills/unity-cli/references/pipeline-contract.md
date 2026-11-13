@@ -11,14 +11,14 @@
 
 ## 当前磁盘基线
 
-2026-11-09 核对：Unity `2022.3.62f1`、CLI `1.0.0-beta.3`、Pipeline `0.10.0-exp.1`。
+2026-11-13 核对：Unity `6000.0.68f1`、CLI `1.0.0-beta.3`、Pipeline `1.0.0`（registry）。
 这是本次维护记录，不是后续任务的固定要求。每次从以下文件和 `doctor` 重新确认：
 
 - [ProjectVersion](../../../../ProjectSettings/ProjectVersion.txt)。
-- [包元数据](../../../../Packages/com.unity.pipeline/package.json)。
-- [包命令索引](../../../../Packages/com.unity.pipeline/Documentation~/command-reference.md)。
-- [命令注册与参数约定](../../../../Packages/com.unity.pipeline/Documentation~/creating-commands.md)。
-- [连接及输出契约](../../../../Packages/com.unity.pipeline/Documentation~/connectivity.md)。
+- [包元数据](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/index.html)。
+- [包命令索引](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/command-reference.html)。
+- [命令注册与参数约定](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/creating-commands.html)。
+- [连接及输出契约](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/connectivity.html)。
 
 | 能力 | 当前限制 |
 |---|---|

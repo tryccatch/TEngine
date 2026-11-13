@@ -7,7 +7,7 @@ description: 通过本项目 com.unity.pipeline 和 Unity CLI 查询、操作及
 
 `com.unity.pipeline` 是本项目 Unity 自动化的执行基础：注册命令、线程调度、对象与资源操作、异步状态和运行结果。
 项目 Python 工作流负责绑定工程、执行已审核命令和保留证据；它只封装包的一部分能力。
-包的[命令参考](../../../Packages/com.unity.pipeline/Documentation~/command-reference.md)和当前注册 schema 是操作依据，
+包的[命令参考](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/command-reference.html)和当前注册 schema 是操作依据，
 不要把其他全局 Unity 技能或网上示例当作本项目接口。
 
 ## 起步
@@ -29,10 +29,10 @@ python .codex/scripts/workflow.py unity query "scene list_open"
 
 | 任务 | 项目规程 | 包内权威入口 |
 |---|---|---|
-| 连接、发现、schema、参数、查询、故障恢复 | [操作规程](references/operations.md) | [connectivity](../../../Packages/com.unity.pipeline/Documentation~/connectivity.md)、[pipeline](../../../Packages/com.unity.pipeline/Documentation~/commands/pipeline.md) |
-| 编译、EditMode/PlayMode、资源和构建证据 | [验证与证据](references/verification.md) | [build-and-compilation](../../../Packages/com.unity.pipeline/Documentation~/commands/build-and-compilation.md) |
-| 场景、对象、组件、Prefab、批处理、项目命令 | [内容操作](references/authoring.md) | [authoring](../../../Packages/com.unity.pipeline/Documentation~/authoring-commands.md)、[safety](../../../Packages/com.unity.pipeline/Documentation~/safety-and-mutations.md) |
-| 截图、Profiler、内存、Player、方法重载 | [诊断与运行时](references/diagnostics.md) | [capture](../../../Packages/com.unity.pipeline/Documentation~/commands/capture.md)、[runtime](../../../Packages/com.unity.pipeline/Documentation~/runtime-setup.md) |
+| 连接、发现、schema、参数、查询、故障恢复 | [操作规程](references/operations.md) | [connectivity](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/connectivity.html)、[pipeline](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/pipeline.html) |
+| 编译、EditMode/PlayMode、资源和构建证据 | [验证与证据](references/verification.md) | [build-and-compilation](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/build-and-compilation.html) |
+| 场景、对象、组件、Prefab、批处理、项目命令 | [内容操作](references/authoring.md) | [authoring](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/authoring-commands.html)、[safety](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/safety-and-mutations.html) |
+| 截图、Profiler、内存、Player、方法重载 | [诊断与运行时](references/diagnostics.md) | [capture](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/capture.html)、[runtime](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/runtime-setup.html) |
 
 只加载本次任务相关的规程和包文档，不复制整份命令目录进上下文。
 

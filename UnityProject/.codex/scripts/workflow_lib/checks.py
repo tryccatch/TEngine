@@ -149,7 +149,13 @@ def doctor(run):
 
     def tools():
         from .core import read_json
-        package = read_json(context.project / "Packages" / "com.unity.pipeline" / "package.json")
+        pipeline_pkg = context.project / "Packages" / "com.unity.pipeline" / "package.json"
+        if not pipeline_pkg.is_file():
+            cached = sorted(context.project.glob("Library/PackageCache/com.unity.pipeline@*/package.json"))
+            if not cached:
+                blocked("Pipeline package metadata not found (embedded or cached).")
+            pipeline_pkg = cached[-1]
+        package = read_json(pipeline_pkg)
         version = (context.project / "ProjectSettings" / "ProjectVersion.txt").read_text(encoding="utf-8")
         if not context.cli.is_file() or not context.solution.is_file():
             blocked("CLI or generated solution missing; see project instructions.")

@@ -3,7 +3,7 @@
 维护核对：2026-11-09。版本以当前源码、CLI help、实时命令目录和 doctor 输出为准。
 入口是[仓库 AGENTS](../AGENTS.md)及[Unity 项目 AGENTS](../UnityProject/AGENTS.md)。
 本地与 CI 可共用 Python 入口。Unity 自动化以项目中的
-[`com.unity.pipeline`](../UnityProject/Packages/com.unity.pipeline/package.json) 为执行基础，
+[`com.unity.pipeline`](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/index.html) 为执行基础，
 不依赖其他 Unity 连接服务或用户级技能安装。
 
 ## 职责与架构

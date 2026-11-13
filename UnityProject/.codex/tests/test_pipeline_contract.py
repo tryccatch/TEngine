@@ -279,7 +279,7 @@ class TestExecutionTests(unittest.TestCase):
         with self.assertRaises(WorkflowError) as caught:
             self.unity.tests("editor", "Game.Tests", "assembly", 30)
         self.assertEqual(caught.exception.status, "blocked")
-        self.unity.call.assert_called_once_with("test list", {"mode": "editor"})
+        self.unity.call.assert_called_once_with("test list", {"mode": "editor"}, empty_ok=True)
 
     def test_running_test_is_not_replaced(self):
         self.unity.call = Mock(side_effect=[listing(), {"status": "running"}])
@@ -288,17 +288,15 @@ class TestExecutionTests(unittest.TestCase):
         self.assertEqual(self.unity.call.call_count, 2)
         self.unity.poll.assert_not_called()
 
-    def test_missing_ack_does_not_accept_retained_completed_results(self):
-        self.unity.call = Mock(side_effect=[listing(), results(), {"success": True}])
-        with self.assertRaises(WorkflowError):
-            self.unity.tests("editor", "Game.Tests", "assembly", 30)
-        self.unity.poll.assert_not_called()
-
-    def test_wrong_mode_ack_is_not_accepted(self):
-        self.unity.call = Mock(side_effect=[listing(), results(), {**self.ack, "Mode": "PlayMode"}])
-        with self.assertRaises(WorkflowError):
-            self.unity.tests("editor", "Game.Tests", "assembly", 30)
-        self.unity.poll.assert_not_called()
+    def test_async_start_is_acknowledged_by_exit_code_not_a_body(self):
+        # 1.0.0: async "test run" writes no acknowledgement body; success is the exit code alone.
+        self.unity.call = Mock(side_effect=[listing(), {"status": "no_tests"}, None])
+        value = self.unity.tests("editor", "Game.Tests", "assembly", 30)
+        self.assertEqual(value["summary"]["passed"], 1)
+        run_call = self.unity.call.call_args_list[2]
+        self.assertEqual(run_call.args[0], "test run")
+        self.assertTrue(run_call.kwargs.get("empty_ok"))
+        self.unity.poll.assert_called_once_with("test status", {"completed"}, 30)
 
     def test_stale_or_changed_result_names_are_rejected(self):
         self.unity.call = Mock(side_effect=[listing(), results(), self.ack])

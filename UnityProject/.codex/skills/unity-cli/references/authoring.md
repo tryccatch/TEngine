@@ -1,9 +1,9 @@
 # 内容操作与项目命令
 
-先读本次涉及的包内[资源](../../../../Packages/com.unity.pipeline/Documentation~/commands/assets-and-files.md)、
-[对象组件](../../../../Packages/com.unity.pipeline/Documentation~/commands/gameobjects-and-components.md)、
-[Prefab](../../../../Packages/com.unity.pipeline/Documentation~/commands/prefabs.md)或
-[场景](../../../../Packages/com.unity.pipeline/Documentation~/commands/scenes.md)参考，再取得目标命令的实时 schema。
+先读本次涉及的包内[资源](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/assets-and-files.html)、
+[对象组件](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/gameobjects-and-components.html)、
+[Prefab](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/prefabs.html)或
+[场景](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/scenes.html)参考，再取得目标命令的实时 schema。
 普通源码通过代码编辑工具修改，Unity 对象与序列化通过 Pipeline。
 
 ## 找到目标再写入
@@ -31,7 +31,7 @@ instanceId 不跨重载和重新加载保留，hierarchyPath 也可能重名；�
 
 ## dry-run、路径和 Undo
 
-[`confirm/dry-run`](../../../../Packages/com.unity.pipeline/Documentation~/safety-and-mutations.md)
+[`confirm/dry-run`](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/safety-and-mutations.html)
 由每个命令实现，dispatcher 不统一强制。新增对象等 additive 命令可能直接生效。
 先验证全部输入再写入；支持 dry-run 时核对它确实不产生目标写入。
 
@@ -46,13 +46,13 @@ AssetDatabase、Prefab 写盘、设置、包、构建和部分烘焙不能靠 Ct
 
 ## 批量操作与等待
 
-跨对象的重复 CRUD 可考虑 [`job batch`](../../../../Packages/com.unity.pipeline/Documentation~/commands/batch.md)，
+跨对象的重复 CRUD 可考虑 [`job batch`](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/batch.html)，
 先逐项审核所有 command/params 及跨操作引用，再预览和授权整个范围。
 默认 transactional 仅覆盖可由 Undo 恢复的操作；资产写盘、保存和设置等受限制。
 `on-error=continue` 会关闭事务。dry-run 校验命令、参数和引用拓扑，不等于已经验证目标存在与业务状态。
 最终核对每项 success/error/skipped、applied/reverted 和真实对象，不只看批处理外层成功。
 
-[`job wait`](../../../../Packages/com.unity.pipeline/Documentation~/commands/wait.md) 适合已明确字段的状态等待。
+[`job wait`](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/wait.html) 适合已明确字段的状态等待。
 优先 async，保存 waitId 并核对终态；同步等待会占用命令队列，不能等待尚未发出的操作。
 `on-met` 可以截图或暂停，因此带动作的 wait 不是纯查询。
 `state=met` 仍需检查 onMetError。等待、detached job 和测试状态是不同契约，不能混用 ID 或终态。
@@ -62,8 +62,8 @@ AssetDatabase、Prefab 写盘、设置、包、构建和部分烘焙不能靠 Ct
 已有命令足够时直接使用。重复需要的项目操作才新增薄适配器，业务逻辑放到可测试服务，
 不要修改 `com.unity.pipeline` 或引入另一套连接服务。
 
-先读[命令声明](../../../../Packages/com.unity.pipeline/Documentation~/creating-commands.md)和
-[authoring API](../../../../Packages/com.unity.pipeline/Documentation~/authoring-commands.md)：
+先读[命令声明](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/creating-commands.html)和
+[authoring API](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/authoring-commands.html)：
 
 - 使用明确的项目组名与 `[CliGroupCommand]`，避免与包命令冲突；现有 global 命令按源码保留。
 - asmdef 按实际使用引用 `Unity.Pipeline.Attributes` 或所需的其他程序集，核实平台与 defineConstraints。

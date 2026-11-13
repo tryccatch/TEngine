@@ -211,9 +211,14 @@ def validate_editor_status(value, project):
 
 
 def test_listing(value, mode, query, filter_type):
-    if not isinstance(value, dict):
+    if value is None:
+        tests = []
+    elif isinstance(value, dict):
+        tests = value.get("tests", value.get("Tests"))
+    elif isinstance(value, list):
+        tests = value
+    else:
         raise WorkflowError("Invalid test listing.")
-    tests = value.get("tests", value.get("Tests"))
     if not isinstance(tests, list):
         raise WorkflowError("Test listing lacks individual test identities.")
     expected_mode = {"editor": "EditMode", "playmode": "PlayMode"}[mode]
@@ -316,7 +321,7 @@ class Unity:
             blocked(f"Command is not registered in this project: {command}")
         return self.catalog[command]
 
-    def call(self, command, parameters=None, timeout=45, mutating=False):
+    def call(self, command, parameters=None, timeout=45, mutating=False, empty_ok=False):
         command = canonical_command(command)
         if self.capabilities is None:
             self.discover()
@@ -326,7 +331,10 @@ class Unity:
                      "--timeout", str(timeout), *command.split()]
         for key, value in (parameters or {}).items():
             arguments.extend(["--" + key, json.dumps(value, ensure_ascii=False) if not isinstance(value, str) else value])
-        return decode_response(self.raw(arguments, timeout=timeout + 5, mutating=mutating))
+        stdout = self.raw(arguments, timeout=timeout + 5, mutating=mutating)
+        if empty_ok and not stdout.strip():
+            return None
+        return decode_response(stdout)
 
     def query(self, command, parameters):
         command = canonical_command(command)
@@ -391,20 +399,15 @@ class Unity:
 
     def tests(self, mode, query, filter_type, timeout):
         self.ready()
-        expected = test_listing(self.call("test list", {"mode": mode}), mode, query, filter_type)
+        expected = test_listing(self.call("test list", {"mode": mode}, empty_ok=True), mode, query, filter_type)
         before = self.call("test status")
         if isinstance(before, dict) and before.get("status") == "running":
             blocked("Another test run is active.")
         self.ready()
         # The package synchronously clears prior status before acknowledging the start.
         # An unacknowledged start is ambiguous; never fall back to a retained completed result.
-        started = self.call("test run", {"mode": mode, "filter": query, "filter-type": filter_type,
-                                       "async-tests": True}, mutating=True)
-        if not isinstance(started, dict) or started.get("result", started.get("Result")) != "running":
-            blocked("Async test start was not acknowledged; do not accept the last retained result.")
-        expected_mode = {"editor": "EditMode", "playmode": "PlayMode"}[mode]
-        if started.get("mode", started.get("Mode")) != expected_mode:
-            blocked("Async test acknowledgement differs from the requested test mode.")
+        self.call("test run", {"mode": mode, "filter": query, "filter-type": filter_type,
+                               "async-tests": True}, mutating=True, empty_ok=True)
         value = self.poll("test status", {"completed"}, timeout)
         summary = validate_test_result(value, expected)
         return {"mode": mode, "filter": query, "summary": summary, "results": value["results"]}

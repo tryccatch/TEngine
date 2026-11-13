@@ -38,8 +38,8 @@ python .codex/scripts/workflow.py verify --profile full --asset <Assets/Actual.p
 
 ## Unity 测试
 
-包内契约见 [build-and-compilation](../../../../Packages/com.unity.pipeline/Documentation~/commands/build-and-compilation.md)，
-实现见 [PipelineTestRunner](../../../../Packages/com.unity.pipeline/Editor/Testing/PipelineTestRunner.cs)。
+包内契约见 [build-and-compilation](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/build-and-compilation.html)，
+实现见 [PipelineTestRunner](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/testing.html)。
 
 1. 分别用 `test list --mode editor/playmode` 发现叶用例；按 testName/assembly/category 选择明确集合，
    默认不包含 Explicit。无匹配或全不可运行时阻塞。

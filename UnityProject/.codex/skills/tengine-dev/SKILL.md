@@ -7,7 +7,7 @@ description: 在本仓库实现、排查或审查 TEngine 模块、UIWindow/UIWi
 
 先用 `git status` 和相关实现确定当前基线，沿调用方、接口、实现、asmdef 和测试追踪行为。
 本技能提供框架决策与源码导航；Editor/Player 的执行层是
-[`com.unity.pipeline`](../../../Packages/com.unity.pipeline/package.json)，通过项目
+[`com.unity.pipeline`](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/index.html)，通过项目
 [unity-cli](../unity-cli/SKILL.md) 操作。参考中的签名与示例必须再次对照当前源码。
 
 ## 开发闭环

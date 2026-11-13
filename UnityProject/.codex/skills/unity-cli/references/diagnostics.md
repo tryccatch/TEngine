@@ -9,7 +9,7 @@
 
 ## 图像证据
 
-先读当前 [capture 文档](../../../../Packages/com.unity.pipeline/Documentation~/commands/capture.md)和 schema。
+先读当前 [capture 文档](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/capture.html)和 schema。
 当前 `capture game_view` 默认 `source=screen`，已能读取 Game view 的画面；
 不能沿用旧版“所有截图都只是相机 RenderTexture”的断言。
 
@@ -34,7 +34,7 @@
 
 ## Profiler 与内存
 
-命令和字段见 [profiling-and-memory](../../../../Packages/com.unity.pipeline/Documentation~/commands/profiling-and-memory.md)。
+命令和字段见 [profiling-and-memory](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/profiling-and-memory.html)。
 `diagnostics profiler_targets` 先确认当前目标；Profiler 连接可以指向其他 Player，不能只根据当前 Editor 推断采样对象。
 切换连接、清录制历史、录制、GC 与快照会改变临时状态或写大文件，先说明目标、参数、成本和输出范围。
 
@@ -46,7 +46,7 @@ failed/interrupted 不通过；域重载会中断。录制 framesRecorded 与 fr
 
 ## Player 连接
 
-先读 [Runtime setup](../../../../Packages/com.unity.pipeline/Documentation~/runtime-setup.md)。
+先读 [Runtime setup](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/runtime-setup.html)。
 连接已存在的桌面 Development Player 不等于获准启用 Runtime Pipeline 或构建 Player；
 开关会改变编译 define，发布版本默认不得附带开启。
 
@@ -65,11 +65,11 @@ Player 测试不代替 Editor 资源/编译验证，不读取或分享运行时�
 
 优先已注册的查询/内容命令。确需代码执行时先审核具体代码、输入、调用、状态及写入范围，
 源码仍用编辑工具写到可审查文件，不把长段脚本塞入 shell 字符串。
-[`script eval/run`](../../../../Packages/com.unity.pipeline/Documentation~/commands/scripts.md)
+[`script eval/run`](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/commands/scripts.html)
 不是受限查询；dry-run 主要证明编译，不证明运行正确或写入可撤销。
 超时后异步脚本可能继续生效；不能自动重发。当前 CLI help 未证明支持的 `--detach/unity job` 不直接照抄。
 
-[`MethodReload`](../../../../Packages/com.unity.pipeline/Documentation~/method-reload.md)
+[`MethodReload`](https://docs.unity3d.com/Packages/com.unity.pipeline@1.0/manual/method-reload.html)
 只替换已标记并织入的方法；不保证新增字段、程序集/资源/序列化结构已更新。
 Assembly.Load 和解释器后端约束不同；watcher 会改变 Auto Refresh 并可能将下一次保存推送给连接的 Player。
 先确认 backend、目标与 watcher 状态，不能为一般 TEngine 异步业务强加不支持其语言特性的标记。
