@@ -371,6 +371,8 @@ class BuildPreviewTests(unittest.TestCase):
         self.unity.discover = Mock()
         self.unity.capabilities = {"build run"}
         self.valid_preview = {"status": "dry_run", "valid": True, "validationErrors": []}
+        # com.unity.pipeline 1.0.0 omits validationErrors entirely when the dry run is valid.
+        self.valid_preview_without_errors_field = {"status": "dry_run", "valid": True}
         self.parameters = {"target": "StandaloneWindows64", "output-path": "Builds/Fixture/Game.exe",
                            "scenes": ["Assets/Scenes/Main.unity"]}
 
@@ -381,7 +383,6 @@ class BuildPreviewTests(unittest.TestCase):
             {"status": "dry_run", "valid": True, "validationErrors": [{"field": "scenes", "message": "Missing"}]},
             {"status": "dry_run", "valid": 1, "validationErrors": []},
             {"status": "dry_run", "validationErrors": []},
-            {"status": "dry_run", "valid": True},
             {"status": "queued", "valid": True, "validationErrors": []},
             None,
         )
@@ -397,13 +398,16 @@ class BuildPreviewTests(unittest.TestCase):
                     "build run", {**self.parameters, "dry-run": True})
 
     def test_valid_build_preview_creates_a_bound_plan(self):
-        self.unity.call = Mock(return_value=self.valid_preview)
-        with patch.object(unity_module, "make_plan", return_value={"plan": "fixture-preview.json"}) as make_plan:
-            value = self.unity.preview("build run", self.parameters)
-        self.assertEqual(value, {"plan": "fixture-preview.json"})
-        self.assertEqual(make_plan.call_args.args[3], self.parameters)
-        self.assertEqual(make_plan.call_args.kwargs["preview"], self.valid_preview)
-        self.assertTrue(make_plan.call_args.kwargs["high_risk"])
+        for preview in (self.valid_preview, self.valid_preview_without_errors_field):
+            self.unity.call = Mock(return_value=preview)
+            with self.subTest(preview=preview), patch.object(
+                unity_module, "make_plan", return_value={"plan": "fixture-preview.json"}
+            ) as make_plan:
+                value = self.unity.preview("build run", self.parameters)
+            self.assertEqual(value, {"plan": "fixture-preview.json"})
+            self.assertEqual(make_plan.call_args.args[3], self.parameters)
+            self.assertEqual(make_plan.call_args.kwargs["preview"], preview)
+            self.assertTrue(make_plan.call_args.kwargs["high_risk"])
 
     def test_apply_rejects_invalid_revalidation_before_consuming_approval(self):
         for preview in self.invalid_previews():

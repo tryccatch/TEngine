@@ -85,7 +85,7 @@ def validate_mutation_parameters(command, parameters):
 def validate_mutation_preview(command, value):
     if command == "build run" and (
             not isinstance(value, dict) or value.get("status") != "dry_run"
-            or value.get("valid") is not True or value.get("validationErrors") != []):
+            or value.get("valid") is not True or value.get("validationErrors") not in (None, [])):
         raise WorkflowError("Build dry-run validation did not pass: " + json.dumps(value, ensure_ascii=False))
     return value
 
