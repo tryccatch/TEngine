@@ -23,6 +23,7 @@ from workflow_lib.unity import (
 
 
 def context(root):
+    root = Path(root).resolve()
     return SimpleNamespace(project=root, repo=root.parent, runs=root / "runs", cli=root / "unity.exe")
 
 

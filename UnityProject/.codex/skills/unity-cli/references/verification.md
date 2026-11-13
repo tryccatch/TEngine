@@ -58,7 +58,7 @@ python .codex/scripts/workflow.py verify --profile full --asset <Assets/Actual.p
 ## 资产与视觉
 
 使用明确、可重复的 `--asset`；未提供目标时资产阶段为可选 skipped，不代表扫过全工程。
-项目 `tengine_validate_assets` 的[当前实现](../../../../Assets/TEngine/Extension/HtmlToUGUI/Editor/TEngineWorkflowCommands.cs)：
+项目 `tengine_validate_assets` 的当前实现：
 
 - Prefab/GameObject：递归检查 Missing Script 与可识别的断引用，并检查主资源/importer。
 - 其他普通资产：检查主资源、可识别断引用及 importer。

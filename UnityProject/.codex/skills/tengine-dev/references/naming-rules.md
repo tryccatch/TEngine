@@ -15,7 +15,7 @@ Widget 遍历边界和前缀规则。设置类的默认值可能与序列化资�
 TMP_InputField/TMP_Dropdown、Scrollbar 等较长前缀须位于重叠短前缀前；
 不能仅改名而不检查实际组件与生成字段类型。
 
-HTML 烘焙由 [HtmlToUGUIBakeService](../../../../Assets/TEngine/Extension/HtmlToUGUI/Editor/HtmlToUGUIBakeService.cs)
+HTML 烘焙由 [HtmlToUGUIBaker](../../../../Assets/TEngine/Extension/HtmlToUGUI/Editor/HtmlToUGUIBaker.cs)
 按当前规则归一名称；首次处理可能改变节点名。流程交给 [html-to-ugui](../../html-to-ugui/SKILL.md)，
 生成后重新核对绑定路径，Unity 资源变更通过 CLI 操作，不手改 Prefab YAML。
 
