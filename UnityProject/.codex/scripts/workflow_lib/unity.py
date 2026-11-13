@@ -213,10 +213,16 @@ def validate_editor_status(value, project):
 def test_listing(value, mode, query, filter_type):
     if value is None:
         tests = []
-    elif isinstance(value, dict):
-        tests = value.get("tests", value.get("Tests"))
     elif isinstance(value, list):
         tests = value
+    elif isinstance(value, dict):
+        if "tests" in value or "Tests" in value:
+            tests = value.get("tests", value.get("Tests"))
+        elif any(k in value for k in ("FullName", "fullName", "name", "Name")):
+            # A single test record is returned bare (1.0.0), not wrapped in {tests:[...]}.
+            tests = [value]
+        else:
+            tests = None
     else:
         raise WorkflowError("Invalid test listing.")
     if not isinstance(tests, list):
@@ -285,6 +291,12 @@ class Unity:
             timeout=timeout, mutating=mutating,
         )
         if result.returncode:
+            combined = result.stdout + result.stderr
+            # A modal dialog or domain reload transiently blocks the editor (e.g. "Hold on..." during
+            # PlayMode entry). That is retryable, not a hard failure.
+            if ("STATUS_BLOCKED_BY_DIALOG" in combined or '"blockedBy"' in combined
+                    or '"state": "starting"' in combined):
+                blocked("Unity Editor is temporarily blocked by a dialog/startup; retry the observation.")
             if result.returncode == 14:
                 suffix = " Mutation outcome is unknown; inspect state, do not replay." if mutating else ""
                 blocked("Unity CLI operation timed out; see command evidence." + suffix)

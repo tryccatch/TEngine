@@ -19,7 +19,7 @@ python .codex/scripts/workflow.py verify --profile full --asset <Assets/Actual.p
 | 热更、IL2CPP、目标平台 | 相应构建/设备证据另行授权，不能由 Editor 测试代替 |
 
 `code` 包含 docs 与 .NET 构建；`unity` 包含发现、编译、指定资产及两种模式测试；
-`full` 组合它们和领域隔离回归。默认筛选器 `TEngine.Resource.Tests` 仅为资源生命周期测试，
+`full` 组合它们和领域隔离回归。默认筛选器 `TEngine.Resource` 覆盖 EditMode 与 PlayMode 两套资源生命周期测试程序集，
 不代表完整游戏回归。Profile 是阶段集合，不是质量认证。
 当前不存在的能力不能以 skipped 变为必需阶段通过。
 
