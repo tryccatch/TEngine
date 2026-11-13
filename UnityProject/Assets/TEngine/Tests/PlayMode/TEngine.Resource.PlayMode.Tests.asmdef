@@ -1,0 +1,17 @@
+{
+    "name": "TEngine.Resource.PlayMode.Tests",
+    "references": [
+        "TEngine.Runtime",
+        "UniTask",
+        "YooAsset",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ]
+}
