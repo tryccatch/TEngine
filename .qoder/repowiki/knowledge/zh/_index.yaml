@@ -1,0 +1,79 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: zh-CN
+branch: main
+nodes_managed: true
+exported_at: "2026-11-17T08:52:17Z"
+modules:
+    "":
+        dir_name: TEngine
+        title: TEngine
+        scope: []
+        source_files: []
+        children:
+            - cf5c47d6-fa94-448f-a766-5811859850df
+        depends_on: []
+        related_to: []
+    cf5c47d6-fa94-448f-a766-5811859850df:
+        dir_name: TEngine 文档与 AI 工作流手册
+        title: TEngine 文档与 AI 工作流手册
+        scope:
+            - Books/
+        source_files: []
+        children:
+            - cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7
+        depends_on: []
+        related_to: []
+    cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7:
+        dir_name: TEngine Unity 框架仓库根
+        title: TEngine Unity 框架仓库根
+        scope:
+            - README.md
+            - AGENTS.md
+            - .gitignore
+            - update-tengine.bat
+            - LICENSE
+        source_files: []
+        children:
+            - cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/820c8bdf-ffbf-448e-9407-652068e3868f
+            - cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/9ec1ec5f-ada1-48f8-b5ba-53ae11b7f992
+            - cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/d15715d5-51c8-47d8-93ad-afb5c67f9bba
+            - cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/e1f54b51-a24c-4f77-94bf-ea9731056e7e
+        depends_on: []
+        related_to: []
+    cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/9ec1ec5f-ada1-48f8-b5ba-53ae11b7f992:
+        dir_name: 辅助工具集（静态文件服务器、游戏事件 SourceGenerator、Luban 构建脚本）
+        title: 辅助工具集（静态文件服务器、游戏事件 SourceGenerator、Luban 构建脚本）
+        scope:
+            - Tools/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/820c8bdf-ffbf-448e-9407-652068e3868f:
+        dir_name: Android 构建脚本集（BuildCLI）
+        title: Android 构建脚本集（BuildCLI）
+        scope:
+            - BuildCLI/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/d15715d5-51c8-47d8-93ad-afb5c67f9bba:
+        dir_name: TEngine Unity 项目与热更新框架
+        title: TEngine Unity 项目与热更新框架
+        scope:
+            - UnityProject/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/e1f54b51-a24c-4f77-94bf-ea9731056e7e:
+        dir_name: 游戏配置数据与 Luban 代码生成管线
+        title: 游戏配置数据与 Luban 代码生成管线
+        scope:
+            - Configs/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []

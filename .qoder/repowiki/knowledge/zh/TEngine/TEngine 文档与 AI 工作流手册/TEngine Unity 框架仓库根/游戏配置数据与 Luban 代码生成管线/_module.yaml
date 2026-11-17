@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7/e1f54b51-a24c-4f77-94bf-ea9731056e7e
+title: 游戏配置数据与 Luban 代码生成管线
+scope:
+    - Configs/
+source_files: []
+depends_on: []
+related_to: []

@@ -1,0 +1,12 @@
+schema_version: 1
+module_path: cf5c47d6-fa94-448f-a766-5811859850df/a3b62e49-722f-48f0-a209-3d86afc489f7
+title: TEngine Unity 框架仓库根
+scope:
+    - README.md
+    - AGENTS.md
+    - .gitignore
+    - update-tengine.bat
+    - LICENSE
+source_files: []
+depends_on: []
+related_to: []
